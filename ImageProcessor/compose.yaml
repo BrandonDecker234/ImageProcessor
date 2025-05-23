@@ -1,0 +1,6 @@
+﻿services:
+  imageprocessor:
+    image: imageprocessor
+    build:
+      context: .
+      dockerfile: ImageProcessor/Dockerfile
