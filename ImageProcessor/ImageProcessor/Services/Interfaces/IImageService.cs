@@ -1,4 +1,4 @@
-﻿namespace ImageProcessor.Services;
+﻿namespace ImageProcessor.Services.Interfaces;
 
 public interface IImageService
 {

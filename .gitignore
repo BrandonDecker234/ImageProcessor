@@ -1,0 +1,9 @@
+﻿/ImageProcessor/ImageProcessor/obj
+/ImageProcessor/ImageProcessor/obj/bin
+/ImageProcessor/ImageProcessor/bin
+/ImageProcessor/ImageProcessingTests/obj
+/ImageProcessor/ImageProcessingTests/bin
+/ImageProcessor/.idea
+/ImageProcessor/ImageProcessor/appsettings.json
+/ImageProcessor/ImageProcessor/appsettings.Development.json
+ImageProcessor/ImageProcessingTests/AiRequestClientServiceTest_Live.cs
