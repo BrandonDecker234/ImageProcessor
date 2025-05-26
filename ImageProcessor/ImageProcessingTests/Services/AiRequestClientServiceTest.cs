@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using RestSharp;
 
-namespace ImageProcessingTests;
+namespace ImageProcessingTests.Services;
 
 public class AiRequestClientServiceTests
 {
@@ -64,7 +64,6 @@ public class AiRequestClientServiceTests
         // Arrange
         const string imageUrl = "data:image/png;base64,AAA";
         const string model = "test-model";
-        var cfg = new LlmRequestConfigs { Model = model };
         _builderMock
             .Setup(b => b.BuildSystemPrompt(It.IsAny<LlmRequestConfigs>()))
             .Callback<LlmRequestConfigs>(_ => { });
