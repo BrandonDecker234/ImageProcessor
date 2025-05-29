@@ -12,7 +12,7 @@ public class ImageAnalysisService (
 {
     public async Task<ImageAnalysisResult> AnalyzeImage(IFormFile file, string model = "gemma3:12b")
     {
-        var urlString = imageConverter.ConvertImageToBase64(file).Result;
+        var urlString = await imageConverter.ConvertImageToBase64(file);
         var analysis = await aiRequestClientService.AnalyzeImageAsync(urlString, model);
         
         return analysis;
