@@ -1,5 +1,4 @@
-﻿using ImageProcessor.Models;
-using ImageProcessor.Services.Interfaces;
+﻿using ImageProcessor.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImageProcessor.Controllers;
