@@ -7,7 +7,7 @@ namespace ImageProcessor.Services;
 
 public class MetaDataService(ILogger<IMetaDataService> logger) : IMetaDataService
 {
-    private ImageData GetBasicMetadata(Stream stream)
+    private static ImageData GetBasicMetadata(Stream stream)
     {
         var imageData = new ImageData();
         
