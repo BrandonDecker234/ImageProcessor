@@ -66,4 +66,9 @@ public class ImageService (ILogger<ImageService> logger) : IImageService
         ArgumentNullException.ThrowIfNull(file, nameof(file));
         return RotateAsync(file.OpenReadStream(), degrees);
     }
+
+    public string SetDownloadFileName(string fileName)
+    {
+        return $"{fileName}_{Guid.NewGuid()}";
+    }
 }
