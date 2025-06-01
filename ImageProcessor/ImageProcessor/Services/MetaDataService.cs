@@ -7,7 +7,7 @@ namespace ImageProcessor.Services;
 
 public class MetaDataService : IMetaDataService
 {
-    public ImageData GetBasicMetadata(Stream stream)
+    private static ImageData GetBasicMetadata(Stream stream)
     {
         var imageData = new ImageData();
         
@@ -18,5 +18,11 @@ public class MetaDataService : IMetaDataService
         foreach (var tag in dir.Tags) imageData.Metadata[$"{dir.Name}/{tag.Name}"] = tag.Description ?? "";
         
         return imageData;
+    }
+
+    public ImageData GetBasicMetadata(IFormFile file)
+    {
+        var stream = file.OpenReadStream();
+        return GetBasicMetadata(stream);
     }
 }

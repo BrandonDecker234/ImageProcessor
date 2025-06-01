@@ -47,6 +47,7 @@ builder.Services.AddScoped<IImageAnalysisService, ImageAnalysisService>();
 builder.Services.AddScoped<IAiPromptBuilder, AiPromptBuilder>();
 builder.Services.AddScoped<IAiRequestClientService,AiRequestClientService>();
 builder.Services.AddScoped<IImageConverter, ImageConverter>();
+builder.Services.AddScoped<IMetaDataService, MetaDataService>();
 builder.Services.AddScoped<IJsonConverter, JsonConverter>();
 builder.Services.AddScoped(x =>
 {

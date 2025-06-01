@@ -25,7 +25,6 @@ public class ImageControllerTest
         mockFile.Setup(f => f.FileName).Returns(fileName);
         mockFile.Setup(f => f.ContentType).Returns(contentType);
         mockFile.Setup(f => f.Length).Returns(length);
-        // mockFile.Setup(f => f.OpenReadStream()).Returns(new MemoryStream(new byte[length]));
         return mockFile;
     }
     private static MemoryStream CreateDummyStream(int size = 100)
