@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace ImageProcessingTests;
+namespace ImageProcessingTests.Controllers;
 
 public class ImageAnalysisControllerTest
 {

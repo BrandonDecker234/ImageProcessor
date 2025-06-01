@@ -25,4 +25,22 @@ public class ImageAnalysisController(IImageAnalysisService analysisService, ILog
             return StatusCode(StatusCodes.Status500InternalServerError, "Image analysis failed.");
         }
     }
+    
+    [HttpPost("meta-data")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult>  GetMetaData(
+        IFormFile file,
+        string model)
+    {
+        try
+        {
+            var result = await analysisService.AnalyzeImage(file, model);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error during image analysis");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Image analysis failed.");
+        }
+    }
 }
