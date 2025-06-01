@@ -8,7 +8,6 @@ public class ImageConverter : IImageConverter
     {
         await using var ms = new MemoryStream();
         await file.OpenReadStream().CopyToAsync(ms);
-        var bytes = ms.ToArray();
-        return $"data:{file.ContentType};base64,{Convert.ToBase64String(bytes)}";
+        return $"data:{file.ContentType};base64,{Convert.ToBase64String(ms.ToArray())}";
     }
 }
