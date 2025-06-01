@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace ImageProcessingTests;
+namespace ImageProcessingTests.Services;
 
 public class ImageServiceTest
 {
