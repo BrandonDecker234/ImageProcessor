@@ -6,7 +6,7 @@ namespace ImageProcessor.Models;
 public class ImageAnalysisResult
 {
     [JsonPropertyName("tags")]
-    public List<ImageTag> Tags { get; set; } = [];
+    public List<ImageTag> Tags { get; init; } = [];
 }
 
 public class ImageTag
