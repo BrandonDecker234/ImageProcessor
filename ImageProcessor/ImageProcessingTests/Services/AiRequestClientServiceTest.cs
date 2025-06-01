@@ -2,8 +2,8 @@
 using ImageProcessor.Models;
 using ImageProcessor.Services.Builders.Interfaces;
 using ImageProcessor.Services.Clients;
+using ImageProcessor.Services.Clients.Interfaces;
 using ImageProcessor.Services.Converters.Interfaces;
-using ImageProcessor.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RestSharp;

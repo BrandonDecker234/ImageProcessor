@@ -59,7 +59,8 @@ public class AiPromptBuilder : IAiPromptBuilder
                         ImageUrl = new ImageUrl
                         {
                             Url = imageUrl
-                        }
+                        },
+                        Text = "Image to be analyzed."
                     },
                     new Content
                     {

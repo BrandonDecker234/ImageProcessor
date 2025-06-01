@@ -4,6 +4,7 @@ using ImageProcessor.Services;
 using ImageProcessor.Services.Builders;
 using ImageProcessor.Services.Builders.Interfaces;
 using ImageProcessor.Services.Clients;
+using ImageProcessor.Services.Clients.Interfaces;
 using ImageProcessor.Services.Converters;
 using ImageProcessor.Services.Converters.Interfaces;
 using ImageProcessor.Services.Interfaces;

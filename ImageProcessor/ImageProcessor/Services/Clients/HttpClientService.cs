@@ -1,5 +1,5 @@
 ﻿using ImageProcessor.Models;
-using ImageProcessor.Services.Interfaces;
+using ImageProcessor.Services.Clients.Interfaces;
 using Microsoft.Extensions.Options;
 using RestSharp;
 using RestSharp.Authenticators;
