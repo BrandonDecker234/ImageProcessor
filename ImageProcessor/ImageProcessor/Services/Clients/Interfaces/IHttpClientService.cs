@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace ImageProcessor.Services.Interfaces;
+namespace ImageProcessor.Services.Clients.Interfaces;
 
 public interface  IHttpClientService
 {

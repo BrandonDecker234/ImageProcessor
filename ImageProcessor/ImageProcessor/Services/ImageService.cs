@@ -13,21 +13,21 @@ public class ImageService (ILogger<ImageService> logger) : IImageService
         input.Position = 0;
 
         using var image = await Image.LoadAsync(input);
-        logger.LogInformation("Image loaded. Dimensions: {Width}x{Height}", image.Width, image.Height);
+        logger.LogInformation($"Image loaded. Dimensions: {image.Width}x{image.Height}");
         image.Mutate(mutateAction);
-        logger.LogInformation("Image mutation applied: {mutateAction}", mutateAction);
+        logger.LogInformation($"Image mutation applied: {mutateAction}");
 
         return await SaveImageAsAsync(image);
     }
 
     private async Task<MemoryStream> SaveImageAsAsync(Image image)
     {
-        var output = new MemoryStream();
         var format = image.Metadata.DecodedImageFormat ?? PngFormat.Instance; // Get the original image format. Default to PNG if we can't determine the extension.
-        var encoder = image.Configuration.ImageFormatsManager.GetEncoder(format); // Get the encoder for image format
+        var encoder = image.Configuration.ImageFormatsManager.GetEncoder(format);
         
-        await image.SaveAsync(output, encoder); // Saves the image using the original format. (Unless it uses the fallback value)
-        logger.LogInformation("Image saved to output stream as PNG. Output length={Length}", output.Length);
+        var output = new MemoryStream();
+        await image.SaveAsync(output, encoder); // Saves the image using the original format. Or fallback value
+        logger.LogInformation($"Image saved to output stream as PNG. Output length={output.Length}");
         output.Position = 0;
         return output;
     }
@@ -39,8 +39,8 @@ public class ImageService (ILogger<ImageService> logger) : IImageService
     
     public Task<Stream> ApplyGrayscaleAsync(IFormFile file)
     {
-        logger.LogInformation("Applying Gray Scale: FileName={FileName}, Length={Length}", file.FileName, file.Length);
         ArgumentNullException.ThrowIfNull(file, nameof(file));
+        logger.LogInformation($"Applying Gray Scale: FileName={file.FileName}, Length={file.Length}");
         using var stream = file.OpenReadStream();
         return ApplyGrayscaleAsync(stream);
     }

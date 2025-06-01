@@ -1,4 +1,5 @@
-﻿using ImageProcessor.Services.Interfaces;
+﻿using System.ComponentModel;
+using ImageProcessor.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImageProcessor.Controllers;
@@ -13,6 +14,7 @@ public class ImageAnalysisController(
 {
     [HttpPost("analyze")]
     [Consumes("multipart/form-data")]
+    [Description("Analyzes an image to identify subject matters")]
     public async Task<IActionResult>  GetImageAnalysis(
         IFormFile file,
         string model)
@@ -31,6 +33,7 @@ public class ImageAnalysisController(
     
     [HttpPost("meta-data")]
     [Consumes("multipart/form-data")]
+    [Description("Retrieves metadata from image")]
     public Task<IActionResult>  GetMetaData(
         IFormFile file,
         string model)

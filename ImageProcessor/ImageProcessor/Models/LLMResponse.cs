@@ -5,10 +5,10 @@ namespace ImageProcessor.Models;
 public class RawLlmResponse
 {
     [JsonPropertyName("choices")]
-    public List<Choice> Choices { get; set; } = [];
+    public required List<Choice> Choices { get; init; } = [];
 }
 
-public class Choice
+public abstract class Choice
 {
     [JsonPropertyName("message")]
     public LlmMessage Message { get; set; } = new();

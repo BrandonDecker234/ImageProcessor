@@ -1,6 +1,6 @@
 ﻿using ImageProcessor.Models;
 
-namespace ImageProcessor.Services.Interfaces;
+namespace ImageProcessor.Services.Clients.Interfaces;
 
 public interface IAiRequestClientService
 {

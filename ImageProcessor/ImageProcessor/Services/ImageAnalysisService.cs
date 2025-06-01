@@ -1,4 +1,5 @@
 ﻿using ImageProcessor.Models;
+using ImageProcessor.Services.Clients.Interfaces;
 using ImageProcessor.Services.Converters.Interfaces;
 using ImageProcessor.Services.Interfaces;
 
@@ -13,7 +14,7 @@ public class ImageAnalysisService (
     public async Task<ImageAnalysisResult> AnalyzeImage(IFormFile file, string model = "gemma3:12b")
     {
         var urlString = await imageConverter.ConvertImageToBase64(file);
-        logger.LogInformation("Converted image to base64: {UrlString}", urlString);
+        logger.LogInformation($"Converted image to base64: {urlString}");
         var analysis = await aiRequestClientService.AnalyzeImageAsync(urlString, model);
         
         return analysis;
