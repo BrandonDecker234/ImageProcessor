@@ -1,12 +1,14 @@
 ﻿using ImageProcessor.Services;
+using ImageProcessor.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 
 namespace ImageProcessingTests.Services;
 
 public class MetaDataServiceTest
 {
-    private readonly MetaDataService _metaDataService = new();
+    private readonly MetaDataService _metaDataService = new(new NullLogger<IMetaDataService>());
 
     private Mock<IFormFile> CreateMockFormFile(string fileName = "test.jpg", string contentType = "image/jpeg", byte[] fileContent = null)
     {

@@ -5,9 +5,9 @@ using MetadataExtractor;
 
 namespace ImageProcessor.Services;
 
-public class MetaDataService : IMetaDataService
+public class MetaDataService(ILogger<IMetaDataService> logger) : IMetaDataService
 {
-    private static ImageData GetBasicMetadata(Stream stream)
+    private ImageData GetBasicMetadata(Stream stream)
     {
         var imageData = new ImageData();
         
@@ -23,6 +23,7 @@ public class MetaDataService : IMetaDataService
     public ImageData GetBasicMetadata(IFormFile file)
     {
         var stream = file.OpenReadStream();
+        logger.LogInformation($"Retrieving metadata for stream {file.FileName}");
         return GetBasicMetadata(stream);
     }
 }
