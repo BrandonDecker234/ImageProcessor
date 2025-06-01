@@ -5,7 +5,10 @@ namespace ImageProcessor.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ImageAnalysisController(IImageAnalysisService analysisService, ILogger<ImageAnalysisController> logger)
+public class ImageAnalysisController(
+    IImageAnalysisService analysisService, 
+    ILogger<ImageAnalysisController> logger,
+    IMetaDataService metaDataService)
     : ControllerBase
 {
     [HttpPost("analyze")]
@@ -28,19 +31,19 @@ public class ImageAnalysisController(IImageAnalysisService analysisService, ILog
     
     [HttpPost("meta-data")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult>  GetMetaData(
+    public Task<IActionResult>  GetMetaData(
         IFormFile file,
         string model)
     {
         try
         {
-            var result = await analysisService.AnalyzeImage(file, model);
-            return Ok(result);
+            var result = metaDataService.GetBasicMetadata(file);
+            return Task.FromResult<IActionResult>(Ok(result));
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error during image analysis");
-            return StatusCode(StatusCodes.Status500InternalServerError, "Image analysis failed.");
+            return Task.FromResult<IActionResult>(StatusCode(StatusCodes.Status500InternalServerError, "Image analysis failed."));
         }
     }
 }

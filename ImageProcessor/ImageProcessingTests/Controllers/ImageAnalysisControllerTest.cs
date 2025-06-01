@@ -16,8 +16,9 @@ public class ImageAnalysisControllerTest
     public ImageAnalysisControllerTest()
     {
         _mockAnalysisService = new Mock<IImageAnalysisService>();
+        var mockMetaDataService = new Mock<IMetaDataService>();
         var mockLogger = new Mock<ILogger<ImageAnalysisController>>();
-        _controller = new ImageAnalysisController(_mockAnalysisService.Object, mockLogger.Object);
+        _controller = new ImageAnalysisController(_mockAnalysisService.Object, mockLogger.Object, mockMetaDataService.Object);
     }
 
     [Fact]
