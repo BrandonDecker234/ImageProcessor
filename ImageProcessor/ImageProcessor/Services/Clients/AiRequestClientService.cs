@@ -30,9 +30,7 @@ public class AiRequestClientService (
         
         if(!response.IsSuccessStatusCode || string.IsNullOrEmpty(response.Content)) throw new InvalidOperationException($"Error while processing image. Response: {response.StatusCode} {response.ErrorMessage}");
 
-        var content = jsonConverter.NormalizeJson(response.Content);
-        
-        var result = jsonConverter.Deserialize<ImageAnalysisResult>(content ?? throw new NullReferenceException("Error deserializing the response body"));
+        var result = jsonConverter.Deserialize<ImageAnalysisResult>(jsonConverter.NormalizeJson(response.Content));
 
         return result ?? throw new NullReferenceException("Result object is null");
 

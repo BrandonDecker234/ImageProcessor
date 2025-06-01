@@ -12,7 +12,7 @@ public class HttpClientService : IHttpClientService
 
     public HttpClientService(IOptions<AuthenticationConfigs> configs)
     {
-        if (configs?.Value?.Domain == null || configs.Value.ApiKey == null)
+        if (configs.Value.Domain == null || configs.Value.ApiKey == null)
         {
             throw new ArgumentNullException(nameof(configs), "Authentication configs are required.");
         }
