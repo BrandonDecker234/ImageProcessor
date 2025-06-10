@@ -10,6 +10,7 @@ using ImageProcessor.Services.Converters.Interfaces;
 using ImageProcessor.Services.Interfaces;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using CV = CodeVault.HttpClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,12 +33,12 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<ExceptionFilter>();
 
-builder.Services.AddScoped(x =>
+builder.Services.AddScoped<CV.HttpClient>(x =>
 {
     var openRouter = builder.Configuration.GetSection("OpenRouter");
-    return new AuthenticationConfigs(
-        openRouter.GetSection("ApiKey").Value ?? throw new Exception("API key not found"),
-        openRouter.GetSection("Domain").Value ?? throw new Exception("Domain not found")
+    return new CV.HttpClient(
+        openRouter.GetSection("BaseUrl").Value ?? throw new Exception("API key not found"),
+        openRouter.GetSection("ApiKey").Value ?? throw new Exception("API key not found")
     );
 });
 

@@ -1,13 +1,16 @@
-﻿using ImageProcessor.Models;
+﻿using CodeVault.HttpClient;
+using ImageProcessor.Models;
 using ImageProcessor.Services.Builders.Interfaces;
 using ImageProcessor.Services.Clients.Interfaces;
 using ImageProcessor.Services.Converters.Interfaces;
 using RestSharp;
+using HttpClient = CodeVault.HttpClient.HttpClient;
+
 
 namespace ImageProcessor.Services.Clients;
 
 public class AiRequestClientService (
-    IHttpClientService httpClientService,
+    HttpClient httpClient,
     IAiPromptBuilder aiPromptBuilder,
     IJsonConverter jsonConverter,
     ILogger<AiRequestClientService> logger
@@ -17,22 +20,30 @@ public class AiRequestClientService (
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(model, nameof(model));
         ArgumentException.ThrowIfNullOrWhiteSpace(imageUrl, nameof(imageUrl));
-        
         var requestBody = ConfigureRequestBody(model, imageUrl);
-
-        var request = new RestRequest("/chat/completions").AddHeader("Content-Type", "application/json");
-        
+        var request = new Request("/chat/completions").AddBody(requestBody);
         logger.LogDebug($"Starting request to LLM provider. Request body: {requestBody} {request}");
-        
-        var response = await httpClientService.Post(jsonConverter.Serialize(requestBody), request);
-        
-        logger.LogInformation($"Response was: {response}");
-        
-        if(!response.IsSuccessStatusCode || string.IsNullOrEmpty(response.Content)) throw new InvalidOperationException($"Error while processing image. Response: {response.StatusCode} {response.ErrorMessage}");
+        try
+        {
+            var response = await httpClient.Post(request);
 
-        var result = jsonConverter.Deserialize<ImageAnalysisResult>(jsonConverter.NormalizeJson(response.Content));
+        
+            logger.LogInformation($"Response was: {response}");
+        
+            if(!response.IsSuccessStatusCode || string.IsNullOrEmpty(response.Content)) throw new InvalidOperationException($"Error while processing image. Response: {response.StatusCode} {response.ErrorMessage}");
 
-        return result ?? throw new NullReferenceException("Result object is null");
+            var x = jsonConverter.NormalizeJson(response.Content);
+            var result = jsonConverter.Deserialize<ImageAnalysisResult>(x);
+
+            return result ?? throw new NullReferenceException("Result object is null");
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
 
     }
 

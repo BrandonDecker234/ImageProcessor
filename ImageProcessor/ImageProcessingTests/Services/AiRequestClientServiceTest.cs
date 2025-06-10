@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using CodeVault.HttpClient;
 using ImageProcessor.Models;
 using ImageProcessor.Services.Builders.Interfaces;
 using ImageProcessor.Services.Clients;
@@ -7,12 +8,13 @@ using ImageProcessor.Services.Converters.Interfaces;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RestSharp;
+using HttpClient = CodeVault.HttpClient.HttpClient;
 
 namespace ImageProcessingTests.Services;
 
 public class AiRequestClientServiceTests
 {
-    private readonly Mock<IHttpClientService> _httpMock = new();
+    private readonly Mock<HttpClient> _httpMock = new();
     private readonly Mock<IAiPromptBuilder> _builderMock = new();
     private readonly Mock<IJsonConverter> _jsonMock = new();
     private readonly ILogger<AiRequestClientService> _logger = new Mock<ILogger<AiRequestClientService>>().Object;
@@ -51,8 +53,7 @@ public class AiRequestClientServiceTests
             ErrorMessage = "Error"
         };
         _httpMock
-            .Setup(h => h.Post(It.IsAny<string>(), It.IsAny<RestRequest>()))
-            .ReturnsAsync(badResponse);
+            .Setup(h => h.Post(It.IsAny<Request>()));
 
         // Act & Assert
         await Assert.ThrowsAsync<InvalidOperationException>(() => _service.AnalyzeImageAsync(imageUrl, model));
@@ -77,7 +78,7 @@ public class AiRequestClientServiceTests
         const string rawJson = "```json { \"tags\":[{\"name\":\"cat\",\"confidence\":0.8}] }```";
         const string normalized = "{ \"tags\":[{\"name\":\"cat\",\"confidence\":0.8}] }";
         _httpMock
-            .Setup(h => h.Post(serialized, It.IsAny<RestRequest>()))
+            .Setup(h => h.Post(new Request(It.IsAny<string>())))
             .ReturnsAsync(new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
@@ -104,7 +105,7 @@ public class AiRequestClientServiceTests
         Assert.Same(expectedResult, result);
         _builderMock.Verify(b => b.BuildSystemPrompt(It.IsAny<LlmRequestConfigs>()), Times.Once);
         _builderMock.Verify(b => b.BuildUserPrompt(It.IsAny<LlmRequestConfigs>(), imageUrl), Times.Once);
-        _httpMock.Verify(h => h.Post(serialized, It.IsAny<RestRequest>()), Times.Once);
+        _httpMock.Verify(h => h.Post(It.IsAny<Request>()), Times.Once);
         _jsonMock.Verify(j => j.NormalizeJson(rawJson), Times.Once);
         _jsonMock.Verify(j => j.Deserialize<ImageAnalysisResult>(normalized), Times.Once);
     }
