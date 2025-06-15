@@ -8,7 +8,7 @@ public class RawLlmResponse
     public required List<Choice> Choices { get; init; } = [];
 }
 
-public abstract class Choice
+public class Choice
 {
     [JsonPropertyName("message")]
     public LlmMessage Message { get; set; } = new();
