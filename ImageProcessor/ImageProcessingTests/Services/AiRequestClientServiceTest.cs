@@ -14,7 +14,7 @@ namespace ImageProcessingTests.Services;
 
 public class AiRequestClientServiceTests
 {
-    private readonly Mock<HttpClient> _httpMock = new();
+    private readonly Mock<IHttpClient> _httpMock = new();
     private readonly Mock<IAiPromptBuilder> _builderMock = new();
     private readonly Mock<IJsonConverter> _jsonMock = new();
     private readonly ILogger<AiRequestClientService> _logger = new Mock<ILogger<AiRequestClientService>>().Object;
@@ -45,15 +45,14 @@ public class AiRequestClientServiceTests
         const string imageUrl = "data:image/png;base64,AAA";
         const string model = "test-model";
 
-        var badResponse = new RestResponse
-        {
-            StatusCode = HttpStatusCode.BadRequest,
-            IsSuccessStatusCode = false,
-            Content = null,
-            ErrorMessage = "Error"
-        };
         _httpMock
-            .Setup(h => h.Post(It.IsAny<Request>()));
+            .Setup(h => h.Post(It.IsAny<Request>()))
+            .ReturnsAsync(new RestResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                IsSuccessStatusCode = false,
+                Content = It.IsAny<string>()
+            });
 
         // Act & Assert
         await Assert.ThrowsAsync<InvalidOperationException>(() => _service.AnalyzeImageAsync(imageUrl, model));
@@ -78,7 +77,7 @@ public class AiRequestClientServiceTests
         const string rawJson = "```json { \"tags\":[{\"name\":\"cat\",\"confidence\":0.8}] }```";
         const string normalized = "{ \"tags\":[{\"name\":\"cat\",\"confidence\":0.8}] }";
         _httpMock
-            .Setup(h => h.Post(new Request(It.IsAny<string>())))
+            .Setup(h => h.Post(It.IsAny<Request>()))
             .ReturnsAsync(new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,

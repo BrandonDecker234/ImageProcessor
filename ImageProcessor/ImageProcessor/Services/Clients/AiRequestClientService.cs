@@ -10,7 +10,7 @@ using HttpClient = CodeVault.HttpClient.HttpClient;
 namespace ImageProcessor.Services.Clients;
 
 public class AiRequestClientService (
-    HttpClient httpClient,
+    IHttpClient httpClient,
     IAiPromptBuilder aiPromptBuilder,
     IJsonConverter jsonConverter,
     ILogger<AiRequestClientService> logger
