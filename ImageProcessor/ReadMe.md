@@ -2,6 +2,10 @@
 
 ## Overview
 
+> [NOTE]
+> **This project is experimental and is not intended for production use.**
+> It is provided as-is, without any warranties or guarantees. Use at your own risk.
+
 Welcome to the **Image Analysis API**, a robust and efficient service built with **C# .NET Core**. This API is designed to process image files and extract valuable metadata, providing a programmatic way to analyze various aspects of your images. Whether you're building a content management system, a photo organizer, or simply need to programmatically access image properties, this API offers a solid foundation.
 
 ---
@@ -58,3 +62,31 @@ You can run the API directly from the command line:
 
 ```bash
 dotnet run --project ImageProcessor.Api
+```
+
+```bash
+dotnet test
+```
+
+---
+
+## Current Limitations
+
+*   **No Persistent Storage**: The API currently operates without a database or any form of persistent storage. All data from processed images is held in-memory and will be lost when the application restarts.
+
+---
+
+## Roadmap
+
+Here are some of the features and improvements planned for future releases:
+
+- [ ] **Expanded Image Format Support**: Add support for more image formats like HEIC, WebP, and SVG.
+- [ ] **Advanced Analysis**: Implement more advanced analysis features, such as:
+    - Color palette extraction.
+    - Object detection and recognition.
+    - Facial recognition and analysis.
+- [ ] **Cloud Storage Integration**: Allow processing images directly from cloud storage providers like AWS S3, Azure Blob Storage, or Google Cloud Storage.
+- [ ] **Authentication and Authorization**: Add user authentication and authorization to secure the API endpoints.
+- [ ] **Batch Processing**: Allow users to upload and process multiple images in a single request.
+
+---
