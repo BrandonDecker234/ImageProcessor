@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using ImageProcessor.Models;
+using ImageProcessor.Models.LLMConfigs;
 using ImageProcessor.Services.Builders.Interfaces;
 using ImageProcessor.Services.Clients;
 using ImageProcessor.Services.Clients.Interfaces;

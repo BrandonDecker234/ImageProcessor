@@ -8,6 +8,7 @@ namespace ImageProcessor.Controllers;
 [Route("api/[controller]")]
 public class ImageController(IImageService imageService, ILogger<ImageController> logger) : ControllerBase
 {
+
     [HttpPost("rotate")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult>  RotateImage(

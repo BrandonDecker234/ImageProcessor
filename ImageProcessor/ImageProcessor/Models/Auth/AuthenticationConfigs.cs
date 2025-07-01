@@ -1,4 +1,4 @@
-﻿namespace ImageProcessor.Models;
+﻿namespace ImageProcessor.Models.Auth;
 
 public class AuthenticationConfigs(string apiKey, string domain)
 {

@@ -1,4 +1,5 @@
 ﻿using ImageProcessor.Models;
+using ImageProcessor.Models.LLMConfigs;
 using ImageProcessor.Services.Converters.Interfaces;
 using Newtonsoft.Json;
 

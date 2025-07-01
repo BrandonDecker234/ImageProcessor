@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ImageProcessor.Models;
+namespace ImageProcessor.Models.LLMConfigs;
 
 public class LlmRequestConfigs
 {

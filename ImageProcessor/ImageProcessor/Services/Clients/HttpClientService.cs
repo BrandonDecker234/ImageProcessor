@@ -1,4 +1,5 @@
 ﻿using ImageProcessor.Models;
+using ImageProcessor.Models.Auth;
 using ImageProcessor.Services.Clients.Interfaces;
 using Microsoft.Extensions.Options;
 using RestSharp;
@@ -32,4 +33,5 @@ public class HttpClientService : IHttpClientService
     public async Task<RestResponse> Post(object obj, RestRequest request) => await _client.ExecutePostAsync(request.AddObject(obj));
 
     public async Task<RestResponse> Post(string obj, RestRequest request) => await _client.ExecutePostAsync(request.AddJsonBody(obj));
+
 }

@@ -1,4 +1,5 @@
 ﻿using ImageProcessor.Models;
+using ImageProcessor.Models.LLMConfigs;
 
 namespace ImageProcessor.Services.Builders.Interfaces;
 

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ImageProcessor.Models;
+namespace ImageProcessor.Models.LLMConfigs;
 
 public class RawLlmResponse
 {

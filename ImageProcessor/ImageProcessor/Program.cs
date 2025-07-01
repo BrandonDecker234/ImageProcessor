@@ -1,5 +1,6 @@
 using ImageProcessor.Middleware;
 using ImageProcessor.Models;
+using ImageProcessor.Models.Auth;
 using ImageProcessor.Services;
 using ImageProcessor.Services.Builders;
 using ImageProcessor.Services.Builders.Interfaces;

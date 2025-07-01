@@ -24,7 +24,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Extensions\" />
       <Folder Include="Repositories\" />
+      <Folder Include="Services\Implementations\" />
     </ItemGroup>
 
 </Project>
