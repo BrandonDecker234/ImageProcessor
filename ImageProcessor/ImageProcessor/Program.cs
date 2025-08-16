@@ -75,7 +75,11 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // serve UI at app root ("/")
 });
 
-app.UseHttpsRedirection();
+// Only use HTTPS redirection in development, not in Docker/Production HTTP-only setup
+if (app.Environment.IsDevelopment())
+{
+    // app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
