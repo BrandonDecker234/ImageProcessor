@@ -5,9 +5,9 @@ services:
       context: .
       dockerfile: ImageProcessor/Dockerfile
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "9000:9000"
+      - "9001:9001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:9000
       - DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0

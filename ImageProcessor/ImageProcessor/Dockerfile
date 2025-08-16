@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 9000
+EXPOSE 9001
 
 # Fix SSL certificate issues in Docker (run as root first)
 RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
