@@ -1,8 +1,18 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+
+# Fix SSL certificate issues in Docker (run as root first)
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+
+# Set environment variables for SSL fixes
+ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=""
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=""
+
+# Switch to non-root user after installing packages
+USER $APP_UID
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
